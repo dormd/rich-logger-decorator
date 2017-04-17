@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { MethodLoggerOptions } from './interfaces';
+import { FunctionLoggerOptions } from './interfaces';
 
 const STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
 const ARGUMENT_NAMES = /([^\s,]+)/g;
@@ -8,7 +8,7 @@ const getClassName = function(instance): string {
   return instance.constructor ? instance.constructor.name : null;
 };
 
-const getArgsStrings = function(argValues: any[], func: Function, options: MethodLoggerOptions): string[] {
+const getArgsStrings = function(argValues: any[], func: Function, options: FunctionLoggerOptions): string[] {
   const fnStr = func.toString().replace(STRIP_COMMENTS, '');
   let argNames: string[] | null = fnStr.slice(fnStr.indexOf('(')+1, fnStr.indexOf(')')).match(ARGUMENT_NAMES);
   if(argNames === null)
@@ -39,7 +39,7 @@ const getTime = function(): string {
   return timeStr;
 };
 
-export const logMessage = function(isStart: boolean, targetInstance, methodName, method, methodArgsVals, options: MethodLoggerOptions): void {
+export const logMessage = function(isStart: boolean, targetInstance, functionName, originalFunction, functionArgsVals, options: FunctionLoggerOptions): void {
   const time = options.withTime ? getTime() : ''
 
   const className = getClassName(targetInstance);
@@ -47,17 +47,17 @@ export const logMessage = function(isStart: boolean, targetInstance, methodName,
   
   const logFunction = options.logFunction || console.log;
 
-  const args = options.withArgs ? getArgsStrings(methodArgsVals, method, options) : null;
+  const args = options.withArgs ? getArgsStrings(functionArgsVals, originalFunction, options) : null;
   const props = options.withClassProperties ? getPropertiesStrings(options.withClassProperties, targetInstance) : null;
 
   if (options.formatAndLogFunction) {
-    options.formatAndLogFunction(time, classNameStr, methodName, isStart, args, props);
+    options.formatAndLogFunction(time, classNameStr, functionName, isStart, args, props);
     return;
   }
 
   const startEndStr = isStart ? 'start' : 'end';
-  logFunction(`[${time}]\t${classNameStr}${methodName} ${startEndStr}`);
+  logFunction(`[${time}]\t${classNameStr}${functionName} ${startEndStr}`);
 
-  args && logFunction(`\tMethod arguments: ${args.join(' ')}`);
+  args && logFunction(`\tFunction arguments: ${args.join(' ')}`);
   props && logFunction(`\tClass properties: ${props.join(' ')}`);
 };

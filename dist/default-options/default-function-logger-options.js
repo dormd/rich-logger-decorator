@@ -1,7 +1,7 @@
-export var defaultMethodOptions = {
+export var defaultFunctionOptions = {
     withArgs: true,
     withTime: false,
     withClassProperties: true,
     logFunction: console.log
 };
-//# sourceMappingURL=default-method-logger-options.js.map
+//# sourceMappingURL=default-function-logger-options.js.map

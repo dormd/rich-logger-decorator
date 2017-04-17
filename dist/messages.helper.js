@@ -29,20 +29,20 @@ var getTime = function () {
     var timeStr = (new Date()).toLocaleString().replace(',', '');
     return timeStr;
 };
-export var logMessage = function (isStart, targetInstance, methodName, method, methodArgsVals, options) {
+export var logMessage = function (isStart, targetInstance, functionName, originalFunction, functionArgsVals, options) {
     var time = options.withTime ? getTime() : '';
     var className = getClassName(targetInstance);
     var classNameStr = className ? className + "::" : '';
     var logFunction = options.logFunction || console.log;
-    var args = options.withArgs ? getArgsStrings(methodArgsVals, method, options) : null;
+    var args = options.withArgs ? getArgsStrings(functionArgsVals, originalFunction, options) : null;
     var props = options.withClassProperties ? getPropertiesStrings(options.withClassProperties, targetInstance) : null;
     if (options.formatAndLogFunction) {
-        options.formatAndLogFunction(time, classNameStr, methodName, isStart, args, props);
+        options.formatAndLogFunction(time, classNameStr, functionName, isStart, args, props);
         return;
     }
     var startEndStr = isStart ? 'start' : 'end';
-    logFunction("[" + time + "]\t" + classNameStr + methodName + " " + startEndStr);
-    args && logFunction("\tMethod arguments: " + args.join(' '));
+    logFunction("[" + time + "]\t" + classNameStr + functionName + " " + startEndStr);
+    args && logFunction("\tFunction arguments: " + args.join(' '));
     props && logFunction("\tClass properties: " + props.join(' '));
 };
 //# sourceMappingURL=messages.helper.js.map

@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
-import { defaultMethodOptions } from './default-options';
+import { defaultFunctionOptions } from './default-options';
 import { logMessage } from './messages.helper';
-var methodLogger = function (options) {
-    if (options === void 0) { options = defaultMethodOptions; }
+var logger = function (options) {
+    if (options === void 0) { options = defaultFunctionOptions; }
     return function (target, methodName, descriptor) {
         if (descriptor === undefined) {
             descriptor = Object.getOwnPropertyDescriptor(target, methodName);
@@ -34,18 +34,18 @@ export var getMonkeyPatchMethod = function (method, methodName, options) {
         logMessage(false, this, methodName, method, args, options);
     };
 };
-export function MethodLogger(options) {
-    if (options === void 0) { options = defaultMethodOptions; }
-    return methodLogger(options);
+export function Logger(options) {
+    if (options === void 0) { options = defaultFunctionOptions; }
+    return logger(options);
 }
-export function MethodLoggerWithoutArgs(options) {
-    if (options === void 0) { options = defaultMethodOptions; }
+export function LoggerWithoutArgs(options) {
+    if (options === void 0) { options = defaultFunctionOptions; }
     options = _.extend({}, options, {
         withArgs: false
     });
-    return MethodLogger(options);
+    return Logger(options);
 }
-export function DisableLogger() {
+export function DisableMethodLogger() {
     return disableMethodLogger();
 }
-//# sourceMappingURL=method-logger.decorator.js.map
+//# sourceMappingURL=function-logger.decorator.js.map

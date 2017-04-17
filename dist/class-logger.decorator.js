@@ -1,9 +1,9 @@
 import * as _ from 'lodash';
-import { defaultMethodOptions, defaultClassOptions } from './default-options';
-import { getMonkeyPatchMethod } from './method-logger.decorator';
+import { defaultFunctionOptions, defaultClassOptions } from './default-options';
+import { getMonkeyPatchMethod } from './function-logger.decorator';
 export function ClassLogger(options) {
     if (options === void 0) { options = defaultClassOptions; }
-    options.methodOptions = options.methodOptions || defaultMethodOptions;
+    options.methodOptions = options.methodOptions || defaultFunctionOptions;
     return function (target) {
         _.keys(target.prototype).filter(function (methodName) {
             return !options.loggedMethodsNames || options.loggedMethodsNames.indexOf(methodName) !== -1;

@@ -1,5 +1,5 @@
-import { MethodLoggerOptions } from './method-logger-options.interface';
+import { FunctionLoggerOptions } from './function-logger-options.interface';
 export interface ClassLoggerOptions {
-    methodOptions?: MethodLoggerOptions;
+    methodOptions?: FunctionLoggerOptions;
     loggedMethodsNames?: string[];
 }

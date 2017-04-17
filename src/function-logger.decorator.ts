@@ -1,9 +1,9 @@
 import * as _ from 'lodash';
-import { MethodLoggerOptions } from './interfaces';
-import { defaultMethodOptions } from './default-options';
+import { FunctionLoggerOptions } from './interfaces';
+import { defaultFunctionOptions } from './default-options';
 import { logMessage } from './messages.helper';
 
-const methodLogger = function(options = defaultMethodOptions): Function {
+const logger = function(options = defaultFunctionOptions): Function {
   return function(target, methodName: string, descriptor) {
     if (descriptor === undefined) {
       descriptor = Object.getOwnPropertyDescriptor(target, methodName);
@@ -31,7 +31,7 @@ const disableMethodLogger = function(): Function {
   };
 };
 
-export const getMonkeyPatchMethod = function (method: Function, methodName: string, options: MethodLoggerOptions): Function {
+export const getMonkeyPatchMethod = function (method: Function, methodName: string, options: FunctionLoggerOptions): Function {
   return function(...args) {
     logMessage(true, this, methodName, method, args, options);
     method.apply(this, args);
@@ -39,18 +39,18 @@ export const getMonkeyPatchMethod = function (method: Function, methodName: stri
   };
 };
 
-export function MethodLogger(options = defaultMethodOptions): Function {
-  return methodLogger(options);
+export function Logger(options = defaultFunctionOptions): Function {
+  return logger(options);
 }
 
-export function MethodLoggerWithoutArgs(options = defaultMethodOptions): Function {
+export function LoggerWithoutArgs(options = defaultFunctionOptions): Function {
   options = _.extend({}, options, {
     withArgs: false
   });
 
-  return MethodLogger(options);
+  return Logger(options);
 }
 
-export function DisableLogger(): Function {
+export function DisableMethodLogger(): Function {
   return disableMethodLogger();
 }
