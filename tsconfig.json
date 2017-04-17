@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "module": "es6",
+        "target": "es5",
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "declaration": true,
+        "outDir": "dist/",
+        "lib": [
+            "es6", "dom"
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        "examples"
+    ]
+}

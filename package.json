@@ -1,0 +1,26 @@
+{
+  "name": "rich-logger-decorator",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "description": "Rich Logger Typescript Decorator for Easy Coding & Debugging Edit",
+  "license": "MIT",
+  "scripts": {
+    "prepublish": "rm -rf ./dist && tsc"
+  },
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "maintainers": [
+    "Dor Moshe"
+  ],
+  "repository": {
+    "url": "https://github.com/dormd/rich-logger-decorator"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@types/lodash": "^4.14.62",
+    "lodash": "^4.17.4",
+    "typescript": "^2.2.2"
+  }
+}
