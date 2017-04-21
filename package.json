@@ -5,7 +5,8 @@
   "description": "Rich Logger Typescript Decorator for Easy Coding & Debugging Edit",
   "license": "MIT",
   "scripts": {
-    "prepublish": "rm -rf ./dist && tsc"
+    "prepublish": "rm -rf ./dist && tsc -p tsconfig.json",
+    "clean_js": "rm -rf **/**/*.js"
   },
   "typings": "./dist/index.d.ts",
   "files": [
