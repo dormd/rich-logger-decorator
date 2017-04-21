@@ -1,7 +1,7 @@
 {
   "name": "rich-logger-decorator",
-  "version": "2.0.0",
-  "main": "dist/index.js",
+  "version": "3.0.0",
+  "main": "src/index.ts",
   "description": "Rich Logger Typescript Decorator for Easy Coding & Debugging Edit",
   "license": "MIT",
   "scripts": {
