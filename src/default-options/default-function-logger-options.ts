@@ -2,7 +2,7 @@ import { FunctionLoggerOptions } from '../interfaces/function-logger-options.int
 
 export const defaultFunctionOptions: FunctionLoggerOptions = {
   withArgs: true,
-  withTime: false,
+  withTime: true,
   withClassProperties: true,
-  logFunction: console.log
+  logFunction: console.info
 };

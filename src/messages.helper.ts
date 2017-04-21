@@ -40,12 +40,12 @@ const getTime = function(): string {
 };
 
 export const logMessage = function(isStart: boolean, targetInstance, functionName, originalFunction, functionArgsVals, options: FunctionLoggerOptions): void {
-  const time = options.withTime ? getTime() : ''
+  const time = options.withTime ? `[${getTime()}` : ''
 
   const className = getClassName(targetInstance);
   const classNameStr = className ? `${className}::` : '';
   
-  const logFunction = options.logFunction || console.log;
+  const logFunction = options.logFunction || console.info;
 
   const args = options.withArgs ? getArgsStrings(functionArgsVals, originalFunction, options) : null;
   const props = options.withClassProperties ? getPropertiesStrings(options.withClassProperties, targetInstance) : null;
@@ -56,8 +56,8 @@ export const logMessage = function(isStart: boolean, targetInstance, functionNam
   }
 
   const startEndStr = isStart ? 'start' : 'end';
-  logFunction(`[${time}]\t${classNameStr}${functionName} ${startEndStr}`);
+  logFunction(`${time}\t${classNameStr}${functionName}\t${startEndStr}`);
 
-  args && logFunction(`\tFunction arguments: ${args.join(' ')}`);
-  props && logFunction(`\tClass properties: ${props.join(' ')}`);
+  args && logFunction(`\tFunction arguments:\t${args.join(' ')}`);
+  props && logFunction(`\tClass properties:\t${props.join(' ')}`);
 };
