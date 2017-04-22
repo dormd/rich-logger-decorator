@@ -34,8 +34,10 @@ const disableMethodLogger = function(): Function {
 export const getMonkeyPatchMethod = function (method: Function, methodName: string, options: FunctionLoggerOptions): Function {
   return function(...args) {
     logMessage(true, this, methodName, method, args, options);
-    method.apply(this, args);
+    const result = method.apply(this, args);
     logMessage(false, this, methodName, method, args, options);
+    
+    return result;
   };
 };
 
